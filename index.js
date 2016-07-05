@@ -9323,29 +9323,35 @@ var DOM_Node_Node = require("../DOM.Node.Node");
 var DOM_Node_Document = require("../DOM.Node.Document");
 var DOM_Node_Types = require("../DOM.Node.Types");
 var Control_Bind = require("../Control.Bind");
+var Control_Semigroupoid = require("../Control.Semigroupoid");
+var Control_Applicative = require("../Control.Applicative");
 var Data_Function = require("../Data.Function");
 var main = function __do() {
-    var v = DOM_HTML.window();
-    var v1 = DOM_HTML_Window.document(v)();
-    var v2 = Data_Function.apply(DOM_Node_Document.createElement("canvas"))(DOM_HTML_Types.htmlDocumentToDocument(v1))();
-    var v3 = DOM_HTML_Document.body(v1)();
-    var _bod = Data_Nullable.toMaybe(v3);
-    if (_bod instanceof Data_Maybe.Just) {
-        var ___bod = Data_Function.apply(DOM_Node_Types.elementToNode)(DOM_HTML_Types.htmlElementToElement(_bod.value0));
-        var _cnv = DOM_Node_Types.elementToNode(v2);
-        DOM_Node_Node.appendChild(_cnv)(___bod)();
-        return Control_Monad_Eff_Console.log("Hello sailor!")();
-    };
-    if (_bod instanceof Data_Maybe.Nothing) {
+    var v = Control_Bind.bind(Control_Monad_Eff.bindEff)(DOM_HTML.window)(DOM_HTML_Window.document)();
+    var doc = DOM_HTML_Types.htmlDocumentToDocument(v);
+    var v1 = (function __do() {
+        var $8 = DOM_HTML_Document.body(v)();
+        return Data_Nullable.toMaybe($8);
+    })();
+    if (v1 instanceof Data_Maybe.Nothing) {
         return Control_Monad_Eff_Console.log("shit!")();
     };
-    throw new Error("Failed pattern match at Main line 46, column 3 - line 65, column 11: " + [ _bod.constructor.name ]);
+    if (v1 instanceof Data_Maybe.Just) {
+        var v2 = (function __do() {
+            var $9 = DOM_Node_Document.createElement("canvas")(doc)();
+            return DOM_Node_Types.elementToNode($9);
+        })();
+        var _bod = Data_Function.apply(DOM_Node_Types.elementToNode)(DOM_HTML_Types.htmlElementToElement(v1.value0));
+        DOM_Node_Node.appendChild(v2)(_bod)();
+        return Control_Monad_Eff_Console.log("Hello sailor!")();
+    };
+    throw new Error("Failed pattern match at Main line 46, column 3 - line 63, column 11: " + [ v1.constructor.name ]);
 };
 module.exports = {
     main: main
 };
 
-},{"../Control.Bind":9,"../Control.Monad.Eff":17,"../Control.Monad.Eff.Console":15,"../DOM":39,"../DOM.HTML":32,"../DOM.HTML.Document":26,"../DOM.HTML.Types":28,"../DOM.HTML.Window":30,"../DOM.Node.Document":34,"../DOM.Node.Node":36,"../DOM.Node.Types":38,"../Data.Function":71,"../Data.Maybe":83,"../Data.Nullable":93,"../Prelude":126}],120:[function(require,module,exports){
+},{"../Control.Applicative":3,"../Control.Bind":9,"../Control.Monad.Eff":17,"../Control.Monad.Eff.Console":15,"../Control.Semigroupoid":22,"../DOM":39,"../DOM.HTML":32,"../DOM.HTML.Document":26,"../DOM.HTML.Types":28,"../DOM.HTML.Window":30,"../DOM.Node.Document":34,"../DOM.Node.Node":36,"../DOM.Node.Types":38,"../Data.Function":71,"../Data.Maybe":83,"../Data.Nullable":93,"../Prelude":126}],120:[function(require,module,exports){
 "use strict";
 
 // module Math
