@@ -44,8 +44,6 @@ main = do
 --    |      |       |
   let _bod = toMaybe bod
   case _bod of
-    Nothing  -> do
-      log "shit!"
 --       + HTMLElement
 --       |
     Just __bod -> do
@@ -63,3 +61,5 @@ main = do
 --    |            |   |
       appendChild _cnv ___bod
       log "Hello sailor!"
+    Nothing  -> do
+      log "shit!"
